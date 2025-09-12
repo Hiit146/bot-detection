@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-lg">
+            <div class="card-header bg-{{ 'danger' if prediction.is_bot else 'success' }} text-white">
+                <h3 class="mb-0">
+                    <i class="fas fa-{{ 'exclamation-triangle' if prediction.is_bot else 'check-circle' }} me-2"></i>
+                    Analysis Results
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <!-- Username and Platform -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <strong>Username:</strong> @{{ username }}
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Platform:</strong> {{ platform.title() }}
+                    </div>
+                </div>
+
+                <!-- Main Result -->
+                <div class="text-center mb-4">
+                    <div class="display-6 mb-3">
+                        {% if prediction.is_bot %}
+                            <span class="text-danger">
+                                <i class="fas fa-robot fa-2x"></i><br>
+                                Likely Bot Account
+                            </span>
+                        {% else %}
+                            <span class="text-success">
+                                <i class="fas fa-user-check fa-2x"></i><br>
+                                Likely Human Account
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Confidence and Risk Level -->
+                <div class="row mb-4">
+                    <div class="col-md-6 mb-3">
+                        <div class="card border-info">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Confidence Score</h5>
+                                <div class="display-6 text-info">{{ prediction.confidence }}</div>
+                                <div class="progress mt-2">
+                                    <div class="progress-bar bg-info" style="width: {{ prediction.confidence * 100 }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="card border-warning">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Risk Level</h5>
+                                <div class="display-6 text-warning">{{ prediction.risk_level }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features Analyzed -->
+                <div class="mb-4">
+                    <h6>Features Analyzed:</h6>
+                    <div class="row">
+                        {% for feature in prediction.features_analyzed %}
+                            <div class="col-md-4 mb-2">
+                                <span class="badge bg-secondary">{{ feature.replace('_', ' ').title() }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="text-center">
+                    <a href="{{ url_for('index') }}" class="btn btn-primary">
+                        <i class="fas fa-search me-1"></i>Analyze Another Account
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

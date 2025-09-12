@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <!-- Hero Section -->
+        <div class="text-center mb-5">
+            <i class="fas fa-search-plus fa-4x text-primary mb-3"></i>
+            <h1 class="display-4 fw-bold text-primary">Bot Detection System</h1>
+            <p class="lead text-muted">Detect bots and fake accounts using advanced machine learning</p>
+        </div>
+
+        <!-- Detection Form -->
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-user-secret me-2"></i>Analyze Account
+                </h3>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('detect_bot') }}" id="detectionForm">
+                    <div class="mb-4">
+                        <label for="username" class="form-label fw-bold">
+                            <i class="fas fa-at me-1"></i>Username
+                        </label>
+                        <input type="text" 
+                               class="form-control form-control-lg" 
+                               id="username" 
+                               name="username" 
+                               placeholder="Enter username to analyze" 
+                               required 
+                               maxlength="100">
+                        <div class="form-text">Enter the username without @ symbol</div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="platform" class="form-label fw-bold">
+                            <i class="fas fa-globe me-1"></i>Platform
+                        </label>
+                        <select class="form-select form-select-lg" id="platform" name="platform">
+                            <option value="twitter">Twitter/X</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="reddit">Reddit</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg" id="analyzeBtn">
+                            <i class="fas fa-analytics me-2"></i>Analyze Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('detectionForm').addEventListener('submit', function(e) {
+    const btn = document.getElementById('analyzeBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Analyzing...';
+});
+</script>
+{% endblock %}

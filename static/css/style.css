@@ -1,0 +1,51 @@
+/* Custom styles for bot detection app */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 60px 0;
+}
+
+.feature-card {
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.confidence-meter {
+    position: relative;
+    height: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #28a745, #ffc107, #dc3545);
+    transition: width 0.8s ease;
+}
+
+.result-badge {
+    font-size: 1.2em;
+    padding: 15px 25px;
+}
+
+.loading-spinner {
+    display: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
